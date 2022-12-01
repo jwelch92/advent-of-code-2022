@@ -24,7 +24,7 @@ class timer:
 
 
 def get_input(day: int) -> str:
-    """ inspired by https://github.com/alvesvaren/AoC-template/blob/main/aoc/_api.py """
+    """inspired by https://github.com/alvesvaren/AoC-template/blob/main/aoc/_api.py"""
     Path("data").mkdir(exist_ok=True)
     f = Path(f"data/day_{day:02}.txt")
     if f.exists():
