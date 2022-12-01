@@ -1,7 +1,22 @@
 # advent-of-code-2022
 Advent of Code 2022
 
+Adding a new day
 
+```bash
+poetry shell
+./lib.py DAY
+# creates day_02.py from template.py.txt
+./lib.py 2
+```
+
+Watch files shortcut
+
+```bash
+./watch DAY
+# Watch day_01.py running main() function
+./watch 1
+```
 
 ## Tips
 

@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+N=$1
+n=$(printf %02d "$N")
+poetry run watchfiles "day_${n}.main"

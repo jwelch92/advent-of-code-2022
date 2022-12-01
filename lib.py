@@ -1,7 +1,10 @@
+#!/usr/bin/env python
+
 from pathlib import Path
 from typing import Callable, List
 from time import perf_counter
 import requests as requests
+import typer
 from rich.console import Console
 
 console = Console()
@@ -50,3 +53,17 @@ def run(day: int, part: int, solver: Callable) -> None:
         solution = solver(data)
         console.print(f"{'':<4}ANSWER: [green]{solution}")
     print()
+
+
+app = typer.Typer()
+
+
+@app.command(name="gen")
+def gen(day: int) -> None:
+    template = Path("template.py.txt").read_text()
+    data = template.replace("%DAY%", str(day))
+    Path(f"day_{day:02}.py").write_text(data)
+
+
+if __name__ == "__main__":
+    app()
