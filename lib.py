@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import Callable
+from typing import Callable, List
 from time import perf_counter
 import requests as requests
 from rich.console import Console
