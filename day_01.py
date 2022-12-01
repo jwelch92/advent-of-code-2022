@@ -1,23 +1,20 @@
-import bisect
 from typing import Any
 
 from lib import run
 
 
 def solve_one(data: str) -> int:
-    m = 0
-    for chunk in data.split("\n\n"):
-        a = sum([int(i) for i in chunk.splitlines()])
-        if a > m:
-            m = a
-    return m
+    return max(
+        [sum([int(i) for i in chunk.splitlines()]) for chunk in data.split("\n\n")]
+    )
 
 
-def solve_two(data: str) -> Any:
-    m = []
-    for chunk in data.split("\n\n"):
-        bisect.insort(m, sum([int(i) for i in chunk.splitlines()]))
-    return sum(m[-3:])
+def solve_two(data: str) -> int:
+    return sum(
+        sorted(
+            sum([int(i) for i in chunk.splitlines()]) for chunk in data.split("\n\n")
+        )[-3:]
+    )
 
 
 # TODO templatize this
