@@ -1,89 +1,50 @@
-from pprint import pprint
+from typing import Tuple
 
 from lib import run
 
 # AOC DAY 2
 
-ROCK = 1
-PAPER = 2
-SCISSORS = 3
 
-LOSS = 0
-DRAW = 3
-WIN = 6
+def parse(line: str) -> Tuple[int, int]:
+    """
+    Convert from chars to scores
+    A X -> 0
+    B Y -> 1
+    C Z -> 2
 
-MAP = {
-    "X": "A",
-    "Y": "B",
-    "Z": "C"
-}
+    :param line:
+    :return:
+    """
+    a, b = line.split(" ")
+    return ord(a) - ord("A"), ord(b) - ord("X")
 
-SCORE_MAP = {
-    "A": 1,
-    "B": 2,
-    "C": 3
-}
+
+def score(you: int, me: int) -> int:
+    """
+    Calculate score including 3 for draw and 6 for win. Adds me + 1 to account for the 0 indexed score from parse
+    :param you:
+    :param me:
+    :return:
+    """
+    return ((me - you + 1) % 3) * 3 + me + 1
 
 
 def solve_one(data: str) -> int:
-    rounds = data.splitlines()
-    score = 0
-    # pprint(rounds)
-    for l in rounds:
-        opp, you = l.split(" ")
-        you = MAP[you]
-        print(opp, you)
-        if you == opp:
-            score += (DRAW + SCORE_MAP[you])
-        elif opp == "A":
-            if you == "B":
-                score += (WIN + SCORE_MAP[you])
-            else:
-                score += (LOSS + SCORE_MAP[you])
-        elif opp == "B":
-            if you == "C":
-                score += (WIN + SCORE_MAP[you])
-            else:
-                score += (LOSS + SCORE_MAP[you])
-        elif opp == "C":
-            if you == "A":
-                score += (WIN + SCORE_MAP[you])
-            else:
-                score += (LOSS + SCORE_MAP[you])
-
-    return score
-
+    acc = 0
+    for l in data.splitlines():
+        you, me = parse(l)
+        acc += score(you, me)
+    return acc
 
 
 def solve_two(data: str) -> int:
-    score = 0
-    rounds = data.splitlines()
-    for l in rounds:
-        opp, you = l.split(" ")
-        if you == "X":
-            if opp == "A":
-                score += (LOSS + SCISSORS)
-            elif opp == "B":
-                score += (LOSS + ROCK)
-            else:
-                score += (LOSS + PAPER)
+    acc = 0
+    for l in data.splitlines():
+        you, me = parse(l)
+        acc += score(you, (you + me - 1) % 3)
+    return acc
 
-        elif you == "Y":
-            if opp == "A":
-                score += (DRAW + ROCK)
-            elif opp == "B":
-                score += (DRAW + PAPER)
-            else:
-                score += (DRAW + SCISSORS)
-        else:
-            if opp == "A":
-                score += (WIN + PAPER)
-            elif opp == "B":
-                score += (WIN + SCISSORS)
-            else:
-                score += (WIN + ROCK)
 
-    return score
 def main() -> None:
     run(2, 1, solve_one)
     run(2, 2, solve_two)
