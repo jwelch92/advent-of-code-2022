@@ -12,7 +12,6 @@ scores = {
 
 def solve_one(data: str) -> int:
     s = 0
-    print(scores)
     for line in data.splitlines():
         length = len(line)
         first, second = line[: length // 2], line[length // 2 :]
@@ -24,7 +23,6 @@ def solve_one(data: str) -> int:
 def solve_two(data: str) -> int:
     s = 0
     acc = []
-    i = 0
     for line in data.splitlines():
         acc.append(line)
         if len(acc) == 3:

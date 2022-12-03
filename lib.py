@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import time
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from typing import Callable, List
@@ -20,7 +21,7 @@ def days_since_dec1():
     )
     current_datetime = datetime.now(timezone(-timedelta(hours=5)))
     difference = current_datetime - target_datetime
-    return difference.days
+    return difference.days + 1
 
 
 class timer:
@@ -57,6 +58,10 @@ def get_input(day: int) -> str:
 
 
 def run(day: int, part: int, solver: Callable) -> None:
+    if days_since_dec1() < day:
+        print("Blocking until puzzle unlocks")
+        while days_since_dec1() < day:
+            time.sleep(1)
     data = get_input(day)
     console.print(f"=== RUNNING DAY {day} PART {part} ===", style="bold")
     with timer():
