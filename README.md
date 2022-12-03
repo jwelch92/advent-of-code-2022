@@ -1,6 +1,10 @@
 # advent-of-code-2022
 Advent of Code 2022
 
+## Workflow
+
+First, add session cookie to `.session`. 
+
 Adding a new day
 
 ```bash

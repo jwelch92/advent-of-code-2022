@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-
+from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from typing import Callable, List
 from time import perf_counter
@@ -11,6 +11,16 @@ console = Console()
 
 YEAR = 2022
 SESSION: str = Path(".session").read_text()
+
+
+def days_since_dec1():
+    # Create a datetime object for December 1, 2022, 12am ET
+    target_datetime = datetime(
+        2022, 12, 1, 0, 0, 0, tzinfo=timezone(-timedelta(hours=5))
+    )
+    current_datetime = datetime.now(timezone(-timedelta(hours=5)))
+    difference = current_datetime - target_datetime
+    return difference.days
 
 
 class timer:
