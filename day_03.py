@@ -1,6 +1,6 @@
 import string
-
 from lib import run
+from more_itertools import grouper
 
 # AOC DAY 3
 
@@ -22,13 +22,9 @@ def solve_one(data: str) -> int:
 
 def solve_two(data: str) -> int:
     s = 0
-    acc = []
-    for line in data.splitlines():
-        acc.append(line)
-        if len(acc) == 3:
-            same = list(set(acc[0]) & set(acc[1]) & set(acc[2]))[0]
-            s += scores[same]
-            acc = []
+    for a, b, c in grouper(data.splitlines(), 3, incomplete="ignore"):
+        same = list(set(a) & set(b) & set(c))[0]
+        s += scores[same]
     return s
 
 

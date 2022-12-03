@@ -44,3 +44,10 @@ Group by empty line using
 >>> data.split("\n\n")
 ["1000\n2000", "1000\n23333", "44454"]
 ```
+
+
+### Itertools
+
+See https://docs.python.org/3/library/itertools.html and https://pypi.org/project/more-itertools/
+
+More itertools builds on itertools to provide things like sliding windows, grouping, augmenting, combining, etc.
