@@ -11,7 +11,7 @@ from rich.console import Console
 console = Console()
 
 YEAR = 2022
-SESSION: str = Path(".session").read_text()
+
 
 
 def days_since_dec1():
@@ -43,8 +43,9 @@ def get_input(day: int) -> str:
     f = Path(f"data/day_{day:02}.txt")
     if f.exists():
         return f.read_text()
+    session: str = Path(".session").read_text()
     response = requests.get(
-        f"https://adventofcode.com/{YEAR}/day/{day}/input", cookies={"session": SESSION}
+        f"https://adventofcode.com/{YEAR}/day/{day}/input", cookies={"session": session}
     )
     if not response.ok:
         if response.status_code == 404:
@@ -57,7 +58,7 @@ def get_input(day: int) -> str:
     return data
 
 
-def run(day: int, part: int, solver: Callable) -> None:
+def run(day: int, part: int, solver: Callable[[str], int]) -> None:
     if days_since_dec1() < day:
         print("Blocking until puzzle unlocks")
         while days_since_dec1() < day:
