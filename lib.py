@@ -13,7 +13,6 @@ console = Console()
 YEAR = 2022
 
 
-
 def days_since_dec1():
     # Create a datetime object for December 1, 2022, 12am ET
     target_datetime = datetime(
@@ -58,11 +57,15 @@ def get_input(day: int) -> str:
     return data
 
 
-def run(day: int, part: int, solver: Callable[[str], int]) -> None:
+def wait_for_it(day: int) -> None:
     if days_since_dec1() < day:
         print("Blocking until puzzle unlocks")
         while days_since_dec1() < day:
             time.sleep(1)
+
+
+def run(day: int, part: int, solver: Callable[[str], int]) -> None:
+    wait_for_it(day)
     data = get_input(day)
     console.print(f"=== RUNNING DAY {day} PART {part} ===", style="bold")
     with timer():
@@ -70,7 +73,6 @@ def run(day: int, part: int, solver: Callable[[str], int]) -> None:
         console.print(f"{'':<4}ANSWER: [green]{solution}")
     print()
 
-# TODO write runner for checking solutions against the examples given in the prompt
 
 app = typer.Typer()
 

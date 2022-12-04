@@ -1,7 +1,7 @@
 from lib import run
 
 # AOC DAY %DAY%
-
+DAY = %DAY%
 def solve_one(data: str) -> int:
     pass
 
@@ -11,8 +11,8 @@ def solve_two(data: str) -> int:
 
 
 def main() -> None:
-    run(%DAY%, 1, solve_one)
-    run(%DAY%, 2, solve_two)
+    run(DAY, 1, solve_one)
+    run(DAY, 2, solve_two)
 
 
 if __name__ == "__main__":
