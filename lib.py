@@ -70,6 +70,7 @@ def run(day: int, part: int, solver: Callable[[str], int]) -> None:
         console.print(f"{'':<4}ANSWER: [green]{solution}")
     print()
 
+# TODO write runner for checking solutions against the examples given in the prompt
 
 app = typer.Typer()
 
