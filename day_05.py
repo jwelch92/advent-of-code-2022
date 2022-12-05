@@ -30,7 +30,7 @@ def solve_one(data: str) -> Any:
             idx,
         ) in enumerate(range(1, len(line), 4), start=1):
             c = line[idx]
-            if c and c != " ":
+            if c != " ":
                 # Prepend to form a stack where the last element is the top
                 m[count] = [c] + m[count]
     for line in moves.splitlines():
@@ -39,7 +39,7 @@ def solve_one(data: str) -> Any:
         m[dest].extend(reversed(m[src][-count:]))
         # trim src by `count` items
         m[src] = m[src][:-count]
-
+    # TQRFCBSJJ
     return "".join([m[i][-1] for i in range(1, 10)])
 
 
@@ -57,7 +57,7 @@ def solve_two(data: str) -> Any:
             idx,
         ) in enumerate(range(1, len(line), 4), start=1):
             c = line[idx]
-            if c and c != " ":
+            if c != " ":
                 m[count] = [c] + m[count]
     # process moves
     for line in moves.splitlines():
@@ -69,6 +69,8 @@ def solve_two(data: str) -> Any:
         m[dest].extend(m[src][-count:])
         # Trim the top `count` items from src
         m[src] = m[src][:-count:]
+
+    # RMHFJNVFP
     return "".join([m[i][-1] for i in range(1, 10)])
 
 
