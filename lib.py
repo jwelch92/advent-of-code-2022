@@ -2,7 +2,7 @@
 import time
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
-from typing import Callable, List
+from typing import Callable, List, Any
 from time import perf_counter
 import requests as requests
 import typer
@@ -64,7 +64,7 @@ def wait_for_it(day: int) -> None:
             time.sleep(1)
 
 
-def run(day: int, part: int, solver: Callable[[str], int]) -> None:
+def run(day: int, part: int, solver: Callable[[str], Any]) -> None:
     wait_for_it(day)
     data = get_input(day)
     console.print(f"=== RUNNING DAY {day} PART {part} ===", style="bold")
