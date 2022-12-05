@@ -1,12 +1,16 @@
 from lib import run
 
 # AOC DAY %DAY%
+
+
 DAY = %DAY%
-def solve_one(data: str) -> int:
+
+
+def solve_one(data: str) -> Any:
     pass
 
 
-def solve_two(data: str) -> int:
+def solve_two(data: str) -> Any:
     pass
 
 
