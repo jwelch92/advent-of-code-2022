@@ -6,11 +6,26 @@ from typing import Callable, List, Any
 from time import perf_counter
 import requests as requests
 import typer
+from more_itertools import sliding_window
 from rich.console import Console
 
 console = Console()
 
 YEAR = 2022
+
+
+def first_unique_sequence(data: str, length: int) -> int:
+    """From day 6, finds the index of the start marker for a packet. The marker is the first index where the preceding 4 characters are unique."""
+    return (
+        next(
+            (
+                data.index("".join(c))
+                for c in sliding_window(data, length)
+                if len(set(c)) == length
+            )
+        )
+        + length
+    )
 
 
 def days_since_dec1():
