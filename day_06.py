@@ -1,7 +1,13 @@
-from collections import deque
+from more_itertools import sliding_window
 
 from lib import run
 from typing import Any
+from typing import Any
+
+from more_itertools import sliding_window
+
+from lib import run
+
 # AOC DAY 6
 
 
@@ -9,23 +15,29 @@ DAY = 6
 
 
 def solve_one(data: str) -> Any:
-    b = deque()
-    for i, c in enumerate(data):
-        if len(b) == 4:
-            if len(set(b)) == 4 and i > 4:
-                return i
-            b.popleft()
-        b.append(c)
+    return (
+        next(
+            (
+                data.index("".join(c))
+                for c in sliding_window(data, 4)
+                if len(set(c)) == 4
+            )
+        )
+        + 4
+    )
 
 
 def solve_two(data: str) -> Any:
-    b = deque()
-    for i, c in enumerate(data):
-        if len(b) == 14:
-            if len(set(b)) == 14 and i > 4:
-                return i
-            b.popleft()
-        b.append(c)
+    return (
+        next(
+            (
+                data.index("".join(c))
+                for c in sliding_window(data, 14)
+                if len(set(c)) == 14
+            )
+        )
+        + 14
+    )
 
 
 def main() -> None:

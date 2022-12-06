@@ -70,7 +70,7 @@ def run(day: int, part: int, solver: Callable[[str], Any]) -> None:
     console.print(f"=== RUNNING DAY {day} PART {part} ===", style="bold")
     with timer():
         solution = solver(data)
-        console.print(f"{'':<4}ANSWER: [green]{solution}")
+        console.print(f"{'':<6}ANSWER: [green]{solution}")
     print()
 
 

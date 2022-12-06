@@ -21,7 +21,9 @@ def solve_one(data: str) -> Any:
     raw_crates, moves = data.split("\n\n")
     # start at the first real column position 1, step by 4 to skip between possible value positions
     # Enumerate starting at 1 to match our crates 1 based index
-    for line in raw_crates.splitlines()[:-1]:  # trim last line which will always be the column mapping
+    for line in raw_crates.splitlines()[
+        :-1
+    ]:  # trim last line which will always be the column mapping
         for count, c in enumerate(line[1::4], start=1):
             if c != " ":
                 # Prepend to form a stack where the last element is the top
@@ -42,7 +44,9 @@ def solve_two(data: str) -> Any:
     m = {i: list() for i in range(1, 10)}
     raw_crates, moves = data.split("\n\n")
     # Parse starting state
-    for line in raw_crates.splitlines()[:-1]:  # trim last line which will always be the column mapping
+    for line in raw_crates.splitlines()[
+        :-1
+    ]:  # trim last line which will always be the column mapping
         for count, c in enumerate(line[1::4], start=1):
             if c != " ":
                 # Prepend to form a stack where the last element is the top
