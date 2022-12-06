@@ -1,12 +1,13 @@
-from more_itertools import sliding_window
-
-from lib import run
-from typing import Any
+import time
+from collections import deque
 from typing import Any
 
 from more_itertools import sliding_window
+from rich.console import Console
+from rich.live import Live
+from rich.text import Text
 
-from lib import run
+from lib import run, get_input
 
 # AOC DAY 6
 
@@ -40,9 +41,35 @@ def solve_two(data: str) -> Any:
     )
 
 
+def anim(data: str) -> Any:
+    console = Console()
+    b = deque()
+    answer = 0
+    part = 14
+    with Live(Text(data), auto_refresh=False, console=console, screen=True) as live:
+        for i, c in enumerate(data):
+            time.sleep(0.0015)
+            live.update(Text.assemble(
+                (data[:i - part - 1], "dim red"), (data[i - part:i], "bold cyan"), data[i:]), refresh=True)
+            if len(b) == part:
+                if len(set(b)) == part and i > 4:
+                    live.update(Text.assemble(
+                        (data[:i - part - 1], "dim red"), (data[i - part:i], "bold cyan"), (data[i:], "green")), refresh=True)
+                    answer = i
+                    break
+                b.popleft()
+            b.append(c)
+        for i in range(5):
+            live.update(Text.assemble(
+                (data[:answer - 3], "dim red"), (data[answer - part:answer], "bold cyan"), (data[answer:], f"{'bold' if i % 2 == 0 else 'dim'} green")), refresh=True)
+            time.sleep(0.3)
+    console.print(f"[bold blue]Index of start-of-packet marker: {answer}")
+    return answer
+
 def main() -> None:
-    run(DAY, 1, solve_one)
-    run(DAY, 2, solve_two)
+    # run(DAY, 1, solve_one)
+    # run(DAY, 2, solve_two)
+    anim(get_input(DAY))
 
 
 if __name__ == "__main__":
