@@ -1,11 +1,9 @@
 from lib import run
 from typing import Any
+# AOC DAY 6
 
 
-# AOC DAY %DAY%
-
-
-DAY = %DAY%
+DAY = 6
 
 
 def solve_one(data: str) -> Any:
