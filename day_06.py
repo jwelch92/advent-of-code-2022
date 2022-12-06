@@ -1,3 +1,5 @@
+from collections import deque
+
 from lib import run
 from typing import Any
 # AOC DAY 6
@@ -7,11 +9,23 @@ DAY = 6
 
 
 def solve_one(data: str) -> Any:
-    pass
+    b = deque()
+    for i, c in enumerate(data):
+        if len(b) == 4:
+            if len(set(b)) == 4 and i > 4:
+                return i
+            b.popleft()
+        b.append(c)
 
 
 def solve_two(data: str) -> Any:
-    pass
+    b = deque()
+    for i, c in enumerate(data):
+        if len(b) == 14:
+            if len(set(b)) == 14 and i > 4:
+                return i
+            b.popleft()
+        b.append(c)
 
 
 def main() -> None:
