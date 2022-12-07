@@ -48,11 +48,11 @@ def anim(data: str) -> Any:
     part = 14
     with Live(Text(data), auto_refresh=False, console=console, screen=True) as live:
         for i, c in enumerate(data):
-            time.sleep(0.0015)
+            time.sleep(0.005)
             live.update(
                 Text.assemble(
                     (data[: i - part - 1], "dim red"),
-                    (data[i - part : i], "bold cyan"),
+                    ("[[[" + data[i - part : i] + "]]]", "bold cyan"),
                     data[i:],
                 ),
                 refresh=True,
@@ -62,7 +62,7 @@ def anim(data: str) -> Any:
                     live.update(
                         Text.assemble(
                             (data[: i - part - 1], "dim red"),
-                            (data[i - part : i], "bold cyan"),
+                            ("[[[" + data[i - part : i] + "]]]", "bold cyan"),
                             (data[i:], "green"),
                         ),
                         refresh=True,
@@ -75,12 +75,13 @@ def anim(data: str) -> Any:
             live.update(
                 Text.assemble(
                     (data[: answer - 3], "dim red"),
-                    (data[answer - part : answer], "bold cyan"),
+                    ("[[[" + data[answer - part : answer] + "]]]", "bold cyan"),
                     (data[answer:], f"{'bold' if i % 2 == 0 else 'dim'} green"),
                 ),
                 refresh=True,
             )
             time.sleep(0.3)
+        time.sleep(5)
     console.print(f"[bold blue]Index of start-of-packet marker: {answer}")
     return answer
 

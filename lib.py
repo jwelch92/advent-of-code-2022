@@ -8,6 +8,7 @@ import requests as requests
 import typer
 from more_itertools import sliding_window
 from rich.console import Console
+from rich.status import Status
 
 console = Console()
 
@@ -78,10 +79,13 @@ def get_input(day: int) -> str:
 
 
 def wait_for_it(day: int) -> None:
-    if days_since_dec1() < day:
-        print("Blocking until puzzle unlocks")
-        while days_since_dec1() < day:
-            time.sleep(1)
+    try:
+        if days_since_dec1() < day:
+            with Status("Blocking until puzzle unlocks"):
+                while days_since_dec1() < day:
+                    time.sleep(1)
+    except Exception:
+        pass
 
 
 def run(day: int, part: int, solver: Callable[[str], Any]) -> None:
