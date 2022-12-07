@@ -88,14 +88,16 @@ def wait_for_it(day: int) -> None:
         pass
 
 
-def run(day: int, part: int, solver: Callable[[str], Any]) -> None:
+def run(day: int, part: int, solver: Callable[[str], Any], quiet: bool = False) -> None:
     wait_for_it(day)
     data = get_input(day)
-    console.print(f"=== RUNNING DAY {day} PART {part} ===", style="bold")
+    if not quiet:
+        console.print(f"=== RUNNING DAY {day} PART {part} ===", style="bold")
     with timer():
         solution = solver(data)
-        console.print(f"{'':<6}ANSWER: [green]{solution}")
-    print()
+        if not quiet:
+            console.print(f"{'':<6}ANSWER: [green]{solution}")
+    if not quiet: print()
 
 
 app = typer.Typer()

@@ -1,14 +1,54 @@
+import time
 from collections import Counter
-from typing import Any
+from random import randint
+from typing import Any, Text
+
+import rich
 
 from lib import run
-
-# AOC DAY 7
+from rich.console import Console
+from rich.live import Live
+from rich.tree import Tree
+from rich.console import Group
 
 
 DAY = 7
 
+def anim(data: str) -> Any:
+    console = Console()
+    t = Tree("", highlight=True, hide_root=True)
 
+    with Live(t, auto_refresh=False, vertical_overflow="visible", console=console) as live:
+        cur = t
+        s = []
+        for line in data.splitlines():
+            sleep = 0.06
+            match line.split():
+                case ["$", "cd", target]:
+                    instruction = Text(f"[bold]{line}")
+                    # move up one
+                    if target == "..":
+                        s.pop()
+                        cur = s[-1]
+                    else:
+                        cur = cur.add(target, highlight=True, guide_style=f"color({randint(16, 255)})")
+                        s.append(cur)
+                    sleep = .2
+                case ["$", "ls"]:
+                    instruction = Text(f"[bold]{line}")
+                case ["dir", dir]:
+                    cur.add(f":open_file_folder: {dir}")
+                    live.update(Group(instruction, cur), refresh=True)
+                case [size, filename] if size.isdigit():
+                    # Update the sizes for everything in the current tree
+                    cur.add(f"📄 {filename} {size}")
+                    live.update(Group(instruction, cur), refresh=True)
+            time.sleep(sleep)
+            live.update(Group(instruction, cur), refresh=True)
+
+
+
+    rich.print(t)
 def solve_one(data: str) -> Any:
     c = Counter()
     pwd = [""]
@@ -58,9 +98,9 @@ def solve_two(data: str) -> Any:
 
 
 def main() -> None:
-    run(DAY, 1, solve_one)
-    run(DAY, 2, solve_two)
-
+    # run(DAY, 1, solve_one)
+    # run(DAY, 2, solve_two)
+    run(DAY, 1, anim, quiet=True)
 
 if __name__ == "__main__":
     main()
