@@ -59,7 +59,12 @@ def get_input(day: int) -> str:
         return f.read_text()
     session: str = Path(".session").read_text()
     response = requests.get(
-        f"https://adventofcode.com/{YEAR}/day/{day}/input", cookies={"session": session}
+        f"https://adventofcode.com/{YEAR}/day/{day}/input",
+        cookies={"session": session},
+        headers={
+            "User-Agent": "https://github.com/jwelch92/advent-of-code-2022 by jwelch92@gmail.com",
+            "From": "jwelch92@gmail.com",
+        },
     )
     if not response.ok:
         if response.status_code == 404:

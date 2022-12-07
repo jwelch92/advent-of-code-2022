@@ -49,22 +49,41 @@ def anim(data: str) -> Any:
     with Live(Text(data), auto_refresh=False, console=console, screen=True) as live:
         for i, c in enumerate(data):
             time.sleep(0.0015)
-            live.update(Text.assemble(
-                (data[:i - part - 1], "dim red"), (data[i - part:i], "bold cyan"), data[i:]), refresh=True)
+            live.update(
+                Text.assemble(
+                    (data[: i - part - 1], "dim red"),
+                    (data[i - part : i], "bold cyan"),
+                    data[i:],
+                ),
+                refresh=True,
+            )
             if len(b) == part:
                 if len(set(b)) == part and i > 4:
-                    live.update(Text.assemble(
-                        (data[:i - part - 1], "dim red"), (data[i - part:i], "bold cyan"), (data[i:], "green")), refresh=True)
+                    live.update(
+                        Text.assemble(
+                            (data[: i - part - 1], "dim red"),
+                            (data[i - part : i], "bold cyan"),
+                            (data[i:], "green"),
+                        ),
+                        refresh=True,
+                    )
                     answer = i
                     break
                 b.popleft()
             b.append(c)
         for i in range(5):
-            live.update(Text.assemble(
-                (data[:answer - 3], "dim red"), (data[answer - part:answer], "bold cyan"), (data[answer:], f"{'bold' if i % 2 == 0 else 'dim'} green")), refresh=True)
+            live.update(
+                Text.assemble(
+                    (data[: answer - 3], "dim red"),
+                    (data[answer - part : answer], "bold cyan"),
+                    (data[answer:], f"{'bold' if i % 2 == 0 else 'dim'} green"),
+                ),
+                refresh=True,
+            )
             time.sleep(0.3)
     console.print(f"[bold blue]Index of start-of-packet marker: {answer}")
     return answer
+
 
 def main() -> None:
     # run(DAY, 1, solve_one)
