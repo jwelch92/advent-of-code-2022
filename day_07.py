@@ -105,9 +105,9 @@ def solve_two(data: str) -> Any:
 
 
 def main() -> None:
-    # run(DAY, 1, solve_one)
-    # run(DAY, 2, solve_two)
-    run(DAY, 1, anim, quiet=True)
+    run(DAY, 1, solve_one)
+    run(DAY, 2, solve_two)
+    # run(DAY, 1, anim, quiet=True)
 
 
 if __name__ == "__main__":

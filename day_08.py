@@ -1,8 +1,6 @@
-import itertools
-from pprint import pprint
+from typing import Any, List
 
 from lib import run
-from typing import Any, List
 
 # AOC DAY 8
 

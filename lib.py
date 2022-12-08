@@ -48,7 +48,8 @@ class timer:
 
     def __exit__(self, type, value, traceback):
         self.time = perf_counter() - self.time
-        self.readout = f"{'':<4}Time: {self.time:.6f} seconds"
+        ms = self.time * 1000
+        self.readout = f"{'':<4}Time: {ms:2f} ms"
         print(self.readout)
 
 
