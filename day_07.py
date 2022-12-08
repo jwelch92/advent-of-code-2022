@@ -14,11 +14,14 @@ from rich.console import Group
 
 DAY = 7
 
+
 def anim(data: str) -> Any:
     console = Console()
     t = Tree("", highlight=True, hide_root=True)
 
-    with Live(t, auto_refresh=False, vertical_overflow="visible", console=console) as live:
+    with Live(
+        t, auto_refresh=False, vertical_overflow="visible", console=console
+    ) as live:
         cur = t
         s = []
         for line in data.splitlines():
@@ -31,9 +34,13 @@ def anim(data: str) -> Any:
                         s.pop()
                         cur = s[-1]
                     else:
-                        cur = cur.add(target, highlight=True, guide_style=f"color({randint(16, 255)})")
+                        cur = cur.add(
+                            target,
+                            highlight=True,
+                            guide_style=f"color({randint(16, 255)})",
+                        )
                         s.append(cur)
-                    sleep = .2
+                    sleep = 0.2
                 case ["$", "ls"]:
                     instruction = Text(f"[bold]{line}")
                 case ["dir", dir]:
@@ -46,9 +53,9 @@ def anim(data: str) -> Any:
             time.sleep(sleep)
             live.update(Group(instruction, cur), refresh=True)
 
-
-
     rich.print(t)
+
+
 def solve_one(data: str) -> Any:
     c = Counter()
     pwd = [""]
@@ -101,6 +108,7 @@ def main() -> None:
     # run(DAY, 1, solve_one)
     # run(DAY, 2, solve_two)
     run(DAY, 1, anim, quiet=True)
+
 
 if __name__ == "__main__":
     main()

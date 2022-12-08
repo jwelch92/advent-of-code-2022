@@ -97,7 +97,8 @@ def run(day: int, part: int, solver: Callable[[str], Any], quiet: bool = False) 
         solution = solver(data)
         if not quiet:
             console.print(f"{'':<6}ANSWER: [green]{solution}")
-    if not quiet: print()
+    if not quiet:
+        print()
 
 
 app = typer.Typer()
