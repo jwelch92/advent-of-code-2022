@@ -79,9 +79,9 @@ def solve_two(data: str) -> Any:
     return max(scenic)
 
 
-def main() -> None:
-    run(DAY, 1, solve_one)
-    run(DAY, 2, solve_two)
+def main(quiet: bool = False) -> None:
+    run(DAY, 1, solve_one, quiet=quiet)
+    run(DAY, 2, solve_two, quiet=quiet)
 
 
 if __name__ == "__main__":
