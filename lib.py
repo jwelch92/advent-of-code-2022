@@ -76,6 +76,7 @@ def get_input(day: int) -> str:
         )
     data = response.text[:-1]
     f.write_text(data)
+    print(data)
     return data
 
 
