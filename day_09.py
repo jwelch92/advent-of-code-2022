@@ -112,10 +112,7 @@ def solve_two(data: str) -> Any:
                 if abs(d[0]) > 1 or abs(d[1]) > 1:
                     dx = 0 if d[0] == 0 else 1 if d[0] > 0 else -1
                     dy = 0 if d[1] == 0 else 1 if d[1] > 0 else -1
-                    rope[i] = (
-                        t[0] + dx,
-                        t[1] + dy
-                    )
+                    rope[i] = (t[0] + dx, t[1] + dy)
                 visited.add(rope[-1])
 
     return len(visited)
@@ -150,10 +147,7 @@ def anim(data: str) -> Any:
                 if abs(d[0]) > 1 or abs(d[1]) > 1:
                     dx = 0 if d[0] == 0 else 1 if d[0] > 0 else -1
                     dy = 0 if d[1] == 0 else 1 if d[1] > 0 else -1
-                    rope[i] = (
-                        t[0] + dx,
-                        t[1] + dy
-                    )
+                    rope[i] = (t[0] + dx, t[1] + dy)
                     frames.append(copy.deepcopy(rope))
                 visited.add(rope[-1])
 
@@ -174,7 +168,7 @@ def anim(data: str) -> Any:
     # with Live(render(frames[0], grid_x=grid_x, grid_y=grid_y), auto_refresh=False, screen=True) as live:
     #     for f in frames:
     #         live.update(render(f, grid_x=grid_x, grid_y=grid_y), refresh=True)
-            # time.sleep(0.001)
+    # time.sleep(0.001)
     # print(render(frames[35], grid_x=grid_x, grid_y=grid_y))
 
     # Window size
@@ -192,12 +186,9 @@ def anim(data: str) -> Any:
     pygame.init()
 
     # Initialise game window
-    pygame.display.set_caption('Advent of Code Day 9')
+    pygame.display.set_caption("Advent of Code Day 9")
     game_window = pygame.display.set_mode((window_x, window_y))
     fps_controller = pygame.time.Clock()
-
-
-
 
     for frame in frames:
         game_window.fill(black)
@@ -212,7 +203,6 @@ def anim(data: str) -> Any:
         pygame.display.update()
         # Refresh rate
         fps_controller.tick(25)
-
 
     return len(visited)
 

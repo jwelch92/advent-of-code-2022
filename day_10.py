@@ -187,8 +187,12 @@ def solve_two(data: str) -> Any:
         instruction = line.split()
         for i in range(2 if "addx" in instruction else 1):
             pixel = (cycle - 1) % 40  # 40 pixels wide, 0-39
-            char = "█" if abs(X - pixel) <= 1 else "."  # draw a █ if the sprite covers the current pixel. The sprite is 3 wide, so we check if the position is within 1 on either side
-            endl = "\n" if pixel == 39 else "" # Print newline to move to the next row of pixels when we've hit the end (pixel 39)
+            char = (
+                "█" if abs(X - pixel) <= 1 else "."
+            )  # draw a █ if the sprite covers the current pixel. The sprite is 3 wide, so we check if the position is within 1 on either side
+            endl = (
+                "\n" if pixel == 39 else ""
+            )  # Print newline to move to the next row of pixels when we've hit the end (pixel 39)
             print(char, end=endl)
             cycle += 1
         # complete the addx instruction
