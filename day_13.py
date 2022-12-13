@@ -1378,8 +1378,6 @@ def solve_two(data: str) -> Any:
     input.append([[2]])
     input.append([[6]])
     p = sorted(input, key=cmp_to_key(lambda a, b: -1 if comp(a, b) else 1))
-    for i in p:
-        print()
     decode_2 = p.index([[2]]) + 1
     decode_6 = p.index([[6]]) + 1
     return decode_2 * decode_6
