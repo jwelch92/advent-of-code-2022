@@ -1276,6 +1276,7 @@ input = [
 
 DAY = 13
 
+
 def comp(left, right) -> bool:
     if isinstance(left, int) and isinstance(right, int):
         return left < right
@@ -1302,8 +1303,6 @@ def comp(left, right) -> bool:
         if isinstance(right, int):
             right = [right]
         return comp(left, right)
-
-
 
 
 def solve_one(data: str) -> Any:
@@ -1335,10 +1334,10 @@ def solve_one(data: str) -> Any:
 
     packet_tracker = 0
     pair = 0
-    for i in range(0, len(input)-1, 2):
+    for i in range(0, len(input) - 1, 2):
         pair += 1
         print(f"Checking packets ({i}, {i+1})")
-        left, right = input[i], input[i+1]
+        left, right = input[i], input[i + 1]
         print(left)
         print(right)
         c = comp(left, right)
@@ -1348,8 +1347,6 @@ def solve_one(data: str) -> Any:
         print()
 
     return packet_tracker
-
-
 
 
 def solve_two(data: str) -> Any:
@@ -1380,13 +1377,12 @@ def solve_two(data: str) -> Any:
     # ]
     input.append([[2]])
     input.append([[6]])
-    p = sorted(input, key=cmp_to_key(lambda a, b: -1 if comp(a,b) else 1))
+    p = sorted(input, key=cmp_to_key(lambda a, b: -1 if comp(a, b) else 1))
     for i in p:
         print()
     decode_2 = p.index([[2]]) + 1
     decode_6 = p.index([[6]]) + 1
     return decode_2 * decode_6
-
 
 
 def main(quiet: bool = False) -> None:
