@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 import time
+from collections import defaultdict
 from datetime import datetime, timezone, timedelta
+from functools import cache
 from pathlib import Path
-from typing import Callable, List, Any
+from typing import Callable, List, Any, Iterator, Iterable
 from time import perf_counter
 import requests as requests
 import typer
@@ -13,6 +15,59 @@ from rich.status import Status
 console = Console()
 
 YEAR = 2022
+
+Point = tuple[int, int]
+
+
+def neighbors_fn(
+    width: int, height: int, diag: bool = False
+) -> Callable[[Point], Iterator[Point]]:
+    directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]
+    if diag:
+        directions.extend([(1, 1), (1, -1), (-1, 1), (-1, -1)])
+
+    @cache
+    def neighbors(point: Point) -> Iterator[Point]:
+        for (dx, dy) in directions:
+            x, y = point
+            nx = x + dx
+            ny = y + dy
+            if nx < 0 or nx >= width or ny < 0 or ny >= height:
+                continue
+            yield nx, ny
+
+    return neighbors
+
+
+GridCell = str | int | float
+Grid = list[list[str | int | float]]
+PointIndex = dict[Point, str | int | float]
+ValueIndex = dict[str | int | float, list[Point]]
+
+# TODO cast function
+# TODO splitter function
+def build_grid(
+    data: str,
+    cast_fn: Callable[[Any], str | int | float] | None = None,
+    split_fn: Callable[[Iterable[Any]], Iterable[str | int | float]] | None = None,
+) -> tuple[Grid, int, int, PointIndex, ValueIndex]:
+    grid = []
+    points = {}
+    values = defaultdict(list)
+    if cast_fn is None:
+        cast_fn = lambda x: x
+    if split_fn is None:
+        split_fn = lambda xs: xs
+    for y, row in enumerate(data.splitlines()):
+        line = []
+        for x, col in enumerate(split_fn(row)):  # TODO custom splitter
+            col = cast_fn(col)
+            line.append(col)
+            points[(x, y)] = col
+            values[col].append((x, y))
+        grid.append(line)
+
+    return grid, len(grid), len(grid[0]), points, values
 
 
 def first_unique_sequence(data: str, length: int) -> int:
