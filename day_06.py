@@ -28,6 +28,19 @@ def solve_one(data: str) -> Any:
     )
 
 
+def solve_one_xor(data: str) -> Any:
+    w = 4
+    s = 0
+    for i in range(len(data)):
+        s ^= 1 << ord(data[i]) - ord("a")
+
+        if i >= w:
+            s ^= 1 << ord(data[i - w]) - ord("a")
+
+        if bin(s).count("1") == w:
+            return i + 1
+
+
 def solve_two(data: str) -> Any:
     return (
         next(
@@ -88,8 +101,9 @@ def anim(data: str) -> Any:
 
 def main() -> None:
     # run(DAY, 1, solve_one)
+    run(DAY, 1, solve_one_xor)
     # run(DAY, 2, solve_two)
-    anim(get_input(DAY))
+    # anim(get_input(DAY))
 
 
 if __name__ == "__main__":

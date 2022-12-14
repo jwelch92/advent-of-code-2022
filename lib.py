@@ -152,9 +152,8 @@ def run(day: int, part: int, solver: Callable[[str], Any], quiet: bool = False) 
         console.print(f"=== RUNNING DAY {day} PART {part} ===", style="bold")
     with timer():
         solution = solver(data)
-        if not quiet:
-            console.print(f"{'':<6}ANSWER: [green]{solution}")
     if not quiet:
+        console.print(f"{'':<6}ANSWER: [green]{solution}")
         print()
 
 
