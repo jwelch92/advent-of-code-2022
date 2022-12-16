@@ -14,6 +14,9 @@ rich = "^12.6.0"
 typer = "^0.7.0"
 more-itertools = "^9.0.0"
 pygame = "^2.1.2"
+z3-solver = "^4.11.2.0"
+scalene = "^1.5.16"
+networkx = "^2.8.8"
 
 
 [tool.poetry.group.dev.dependencies]
